@@ -56,12 +56,4 @@ storageAccountType='Standard_LRS'
 
 }
 
-New-AzureRmResourceGroup `
-    -Name $resourceGroupName `
-    -Location $Location `
-    -Verbose -Force
-
-
-
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-network.json -TemplateParameterObject $parameters
-#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-vms.json -TemplateParameterObject $parameters
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-vms.json -TemplateParameterObject $parameters
