@@ -276,19 +276,8 @@
           "properties": {
             "addressPrefix": "[parameters('adSubnet')]"
           }
-        },
-        {
-          "name": "[variables('sqlSubnetName')]",
-          "properties": {
-            "addressPrefix": "[parameters('sqlSubnet')]"
-          }
-        },
-        {
-          "name": "[variables('spSubnetName')]",
-          "properties": {
-            "addressPrefix": "[parameters('spSubnet')]"
-          }
         }
+        
       ],
       "SpPublicIpexisting": "[resourceId(parameters('spPublicIPRGName'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('sppublicIPAddressName'))]",
       "SpPublicIpnew": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('sppublicIPAddressName'))]",
@@ -543,7 +532,7 @@
               "value": "[variables('sqlNicName')]"
             },
             "sqlSubnetRef": {
-              "value": "[variables('sqlSubnetRef')]"
+              "value": "[variables('adSubnetRef')]"
             },
             "sqlBEAddressPoolID": {
               "value": "[variables('sqlBEAddressPoolID')]"
@@ -555,7 +544,7 @@
               "value": "[variables('spNicName')]"
             },
             "spSubnetRef": {
-              "value": "[variables('spSubnetRef')]"
+              "value": "[variables('adSubnetRef')]"
             },
             "splbResourceId": {
               "value": "[variables('splbResourceId')]"
