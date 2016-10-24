@@ -1,23 +1,18 @@
-﻿#param(
-#
-# [Parameter(Mandatory=$True)]
-# [string]
-# $srNumber
-#  
-#)
+﻿param(
 
-
+ [Parameter(Mandatory=$True)]
+ [string]
+ $srNumber
+  
+)
 
 Login-AzureRmAccount
-Get-AzureRmSubscription
-Select-AzureRmSubscription -SubscriptionId 3a4af7b3-b7ac-463d-9940-1d80445961a8
-#Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
+Set-AzureRmContext -SubscriptionID e7bc5085-d0bf-464f-aa5c-adb09f9d8fba
 
-$srNumber = 2016
-$resourceGroupName = 'RGsp' + $srNumber
-$location = 'east us 2'
+$resourceGroupName = 'RG-sp' + $srNumber
+$location = 'east us'
 
-$deploymentName = 'sp' + $srNumber
+$deploymentName = 'sp-' + $srNumber
 $storageAccountNamePrefix  = 'storage' + $srNumber
 
 $sharepointFarmName = 'spfarm' + $srNumber
@@ -34,29 +29,28 @@ adSubnet='10.0.0.0/24'
 sqlSubnet='10.0.1.0/24'
 spSubnet= '10.0.2.0/24'
 adNicIPAddress='10.0.0.4'
-adminUsername = 'adiy'
-adminPassword='P@ssw0rd1234'
+adminUsername = 'ahabda'
+adminPassword='WSX5edc@'
 adVMSize = 'Standard_D2_v2'
 sqlVMSize = 'Standard_D2_v2'
 spVMSize='Standard_D5_V2'
-domainName= 'adiy.local' 
-sqlServerServiceAccountUserName='adiysql'
-sqlServerServiceAccountPassword='P@ssw0rd1234'
-sharePointSetupUserAccountUserName='adiysp'
-sharePointSetupUserAccountPassword= 'P@ssw0rd1234'
+domainName= 'ahabda.local' 
+sqlServerServiceAccountUserName='ahabdasql'
+sqlServerServiceAccountPassword='wsx5EDC@'
+sharePointSetupUserAccountUserName='ahabdasp'
+sharePointSetupUserAccountPassword= 'wsx5EDC@'
 sharePointFarmAccountUserName='sp_farm'
-sharePointFarmAccountPassword= 'P@ssw0rd1234'
-sharePointFarmPassphrasePassword='P@ssw0rd1234'
+sharePointFarmAccountPassword= 'wsx5EDC@'
+sharePointFarmPassphrasePassword='wsx5EDC@'
 spSiteTemplateName='STS#0'
 spDNSPrefix='sp-unique'
-#baseUrl='https://raw.githubusercontent.com/aayad/sharepoint-three-vm/master'
-baseUrl = 'C:\Users\aqasrawi\OneDrive - Microsoft\Engagements\BoC Azure\sharepoint-three-vm-master'
+baseUrl='https://raw.githubusercontent.com/aayad/sharepoint-three-vm/master'
 #baseUrl = 'https://raw.githubusercontent.com/razar-msft/SharePoint-Non-HA-FARM/master'
 spPublicIPNewOrExisting='new'
 spPublicIPRGName=''
 sppublicIPAddressName= $sppuplicIP
 storageAccountNamePrefix= $storageAccountNamePrefix
-storageAccountType='Premium_LRS'
+storageAccountType='Standard_LRS'
 
 }
 
@@ -67,6 +61,4 @@ New-AzureRmResourceGroup `
 
 
 
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile "C:\Users\aqasrawi\OneDrive - Microsoft\Engagements\BoC Azure\sharepoint-three-vm-master\azuredeploy.json" -TemplateParameterObject $parameters -Verbose
-
-
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Data\Work\armtemplates\azuredeploy.json -TemplateParameterObject $parameters

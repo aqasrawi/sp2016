@@ -20,8 +20,7 @@
       "type": "string",
       "metadata": {
         "description": "The department"
-      },
-      "defaultValue": "Marketing"
+      }
     },
       "virtualNetworkName": {
         "type": "string",
@@ -168,7 +167,8 @@
         "metadata": {
           "artifactsBaseUrl": "",
           "description": "URL to acquire other templates"
-        },        
+        },
+        "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/sharepoint-three-vm"
       },
       "spPublicIPNewOrExisting": {
         "type": "string",
@@ -231,9 +231,9 @@
       "adSubnetName": "adSubnet",
       "sqlSubnetName": "sqlSubnet",
       "spSubnetName": "spSubnet",
-      "adNicName": "ad2016Nic",
-      "sqlNicName": "sql2016Nic",
-      "spNicName": "sp2016Nic",
+      "adNicName": "adNic",
+      "sqlNicName": "sqlNic",
+      "spNicName": "spNic",
       "VnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworkName'))]",
       "adSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('adSubnetName'))]",
       "sqlSubnetRef": "[concat(variables('VnetID'),'/subnets/',variables('sqlSubnetName'))]",
