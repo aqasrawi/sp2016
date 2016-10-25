@@ -409,7 +409,83 @@
       }
     },
 
-    ],
+
+    {
+      "name": "ConfiguringSharepointVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/ConfiguringSQLServerVM"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('configuringSharepointUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "spVMName": {
+            "value": "[variables('spVMName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "spConfgureModulesURL": {
+            "value": "[variables('spConfigureModulesURL')]"
+          },
+          "spConfigurationFunction": {
+            "value": "[variables('spConfigurationFunction')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "adminUserName": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "sharePointSetupUserAccountUserName": {
+            "value": "[parameters('sharePointSetupUserAccountUserName')]"
+          },
+          "sharePointFarmAccountUserName": {
+            "value": "[parameters('sharePointFarmAccountUserName')]"
+          },
+          "configDatabaseName": {
+            "value": "[variables('configDatabaseName')]"
+          },
+          "administrationContentDatabaseName": {
+            "value": "[variables('administrationContentDatabaseName')]"
+          },
+          "sqlVMName": {
+            "value": "[variables('sqlVMName')]"
+          },
+          "fqdn": {
+            "value": "[variables('spFQDN')]"
+          },
+          "contentDatabaseName": {
+            "value": "[variables('contentDatabaseName')]"
+          },
+          "spSiteTemplateName": {
+            "value": "[parameters('spSiteTemplateName')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "sharePointSetupUserAccountPassword": {
+            "value": "[parameters('sharePointSetupUserAccountPassword')]"
+          },
+          "sharePointFarmAccountPassword": {
+            "value": "[parameters('sharePointFarmAccountPassword')]"
+          },
+          "sharePointFarmPassphrasePassword": {
+            "value": "[parameters('sharePointFarmPassphrasePassword')]"
+          },
+          "sharepointFarmName": {
+            "value": "[parameters('sharepointFarmName')]"
+          }
+        }
+      }
+    }
+
+  ],
     "outputs": {
       "fqdn": {
         "value": "[variables('spFQDN')]",
