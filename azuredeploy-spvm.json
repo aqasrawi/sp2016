@@ -320,95 +320,171 @@
       "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
       "configuringSharepointUrl": "[concat(parameters('baseUrl'),'/configuringSharepoint.json')]"
     },
-    "resources": [
-      {
-        "name": "ProvisioningSharepointVM",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
+  "resources": [
+    {
+      "name": "ProvisioningSharepointVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
 
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('provisioningSharepointUrl')]",
-            "contentVersion": "1.0.0.0"
-          },
-          "parameters": {
-            "spVMName": {
-              "value": "[variables('spVMName')]"
-            },
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "spPrepareModulesURL": {
-              "value": "[variables('spPrepareModulesURL')]"
-            },
-            "spPreparationFunction": {
-              "value": "[variables('spPreparationFunction')]"
-            },
-            "adminUserName": {
-              "value": "[parameters('adminUsername')]"
-            },
-            "adminPassword": {
-              "value": "[parameters('adminPassword')]"
-            },
-            "spVMSize": {
-              "value": "[parameters('spVMSize')]"
-            },
-            "spAvailabilitySetName": {
-              "value": "[variables('spAvailabilitySetName')]"
-            },
-            "spNicName": {
-              "value": "[variables('spNicName')]"
-            },
-            "spDataDisk": {
-              "value": "[variables('spDataDisk')]"
-            },
-            "storageAccountNamePrefix": {
-              "value": "[parameters('storageAccountNamePrefix')]"
-            },
-            "DNSServerAddress": {
-              "value": "[parameters('adNicIPAddress')]"
-            }
-          }
-        }
-      },
-      {
-        "name": "UpdatingDNStoPrimaryADVM",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
-          "Microsoft.Resources/deployments/ProvisioningSharepointVM"
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('vnetwithDNSTemplateUrl')]",
-            "contentVersion": "1.0.0.0"
-          },
-          "parameters": {
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "virtualNetworkName": {
-              "value": "[parameters('virtualNetworkName')]"
-            },
-            "virtualNetworkAddressRange": {
-              "value": "[parameters('virtualNetworkAddressRange')]"
-            },
-            "subnets": {
-              "value": "[variables('subnets')]"
-            },
-            "DNSServerAddress": {
-              "value": [
-                "[parameters('adNicIPAddress')]"
-              ]
-            }
-          }
-        }
-      },
       ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('provisioningSharepointUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "spVMName": {
+            "value": "[variables('spVMName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "spPrepareModulesURL": {
+            "value": "[variables('spPrepareModulesURL')]"
+          },
+          "spPreparationFunction": {
+            "value": "[variables('spPreparationFunction')]"
+          },
+          "adminUserName": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "spVMSize": {
+            "value": "[parameters('spVMSize')]"
+          },
+          "spAvailabilitySetName": {
+            "value": "[variables('spAvailabilitySetName')]"
+          },
+          "spNicName": {
+            "value": "[variables('spNicName')]"
+          },
+          "spDataDisk": {
+            "value": "[variables('spDataDisk')]"
+          },
+          "storageAccountNamePrefix": {
+            "value": "[parameters('storageAccountNamePrefix')]"
+          },
+          "DNSServerAddress": {
+            "value": "[parameters('adNicIPAddress')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "UpdatingDNStoPrimaryADVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/ProvisioningSharepointVM"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('vnetwithDNSTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkAddressRange": {
+            "value": "[parameters('virtualNetworkAddressRange')]"
+          },
+          "subnets": {
+            "value": "[variables('subnets')]"
+          },
+          "DNSServerAddress": {
+            "value": [
+              "[parameters('adNicIPAddress')]"
+            ]
+          }
+        }
+      }
+    },
+
+    {
+      "name": "ConfiguringSharepointVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('configuringSharepointUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "spVMName": {
+            "value": "[variables('spVMName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "spConfgureModulesURL": {
+            "value": "[variables('spConfigureModulesURL')]"
+          },
+          "spConfigurationFunction": {
+            "value": "[variables('spConfigurationFunction')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "adminUserName": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "sharePointSetupUserAccountUserName": {
+            "value": "[parameters('sharePointSetupUserAccountUserName')]"
+          },
+          "sharePointFarmAccountUserName": {
+            "value": "[parameters('sharePointFarmAccountUserName')]"
+          },
+          "configDatabaseName": {
+            "value": "[variables('configDatabaseName')]"
+          },
+          "administrationContentDatabaseName": {
+            "value": "[variables('administrationContentDatabaseName')]"
+          },
+          "sqlVMName": {
+            "value": "[variables('sqlVMName')]"
+          },
+          "fqdn": {
+            "value": "[variables('spFQDN')]"
+          },
+          "contentDatabaseName": {
+            "value": "[variables('contentDatabaseName')]"
+          },
+          "spSiteTemplateName": {
+            "value": "[parameters('spSiteTemplateName')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "sharePointSetupUserAccountPassword": {
+            "value": "[parameters('sharePointSetupUserAccountPassword')]"
+          },
+          "sharePointFarmAccountPassword": {
+            "value": "[parameters('sharePointFarmAccountPassword')]"
+          },
+          "sharePointFarmPassphrasePassword": {
+            "value": "[parameters('sharePointFarmPassphrasePassword')]"
+          },
+          "sharepointFarmName": {
+            "value": "[parameters('sharepointFarmName')]"
+          }
+        }
+      }
+    },
+
+  ],
     "outputs": {
       "fqdn": {
         "value": "[variables('spFQDN')]",
