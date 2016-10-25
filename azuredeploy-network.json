@@ -156,12 +156,7 @@
         },
         "defaultValue": "STS#0"
       },
-      "spDNSPrefix": {
-        "type": "string",
-        "metadata": {
-          "description": "The DNS Prefix for the SharePoint Public IP Address"
-        }
-      },
+
       "baseUrl": {
         "type": "string",
         "metadata": {
