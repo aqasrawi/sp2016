@@ -156,7 +156,12 @@
         },
         "defaultValue": "STS#0"
       },
-
+      "spDNSPrefix": {
+        "type": "string",
+        "metadata": {
+          "description": "The DNS Prefix for the SharePoint Public IP Address"
+        }
+      },
       "baseUrl": {
         "type": "string",
         "metadata": {
@@ -181,6 +186,12 @@
         "defaultValue": "",
         "metadata": {
           "description": "Resource Group containing existing public IP for Sharepoint"
+        }
+      },
+      "sppublicIPAddressName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of existing public IP resource for Sharepoint"
         }
       },
 
@@ -283,6 +294,7 @@
       "SpPublicIpnew": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('sppublicIPAddressName'))]",
       "adPublicIpResourceId": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),variables('adpublicIPAddressName'))]",
       "sqlPublicIpResourceId": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),variables('sqlpublicIPAddressName'))]",
+      "spFQDN": "[concat(parameters('spDNSPrefix'),'.',toLower(trim(replace(parameters('location'),' ' ,''))),'.cloudapp.azure.com')]",
       "splbResourceId": "[resourceId(concat('Microsoft.Network','/','loadBalancers'),variables('spLBName'))]",
       "adModulesURL": "[concat(variables('assetLocation'),'/CreateADPDC.ps1.zip')]",
       "adConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",

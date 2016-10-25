@@ -10,7 +10,7 @@ Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
 
 
-$srNumber = Read-Host ("Enter SR Number") #'2016v'
+$srNumber = '2016v'
 $resourceGroupName = 'RGsp' + $srNumber
 $location = 'east us'
 
@@ -19,7 +19,7 @@ $storageAccountNamePrefix  = 'storage' + $srNumber
 
 $sharepointFarmName = 'spfarm' + $srNumber
 $virtualNetworkName = 'spfarmVNET'+ $srNumber
-#$sppuplicIP = 'sppuplicIP' + $srNumber
+$sppuplicIP = 'sppuplicIP' + $srNumber
 $parameters=@{
 
 
@@ -37,23 +37,20 @@ adVMSize = 'Standard_D2_v2'
 sqlVMSize = 'Standard_D2_v2'
 spVMSize='Standard_D5_V2'
 domainName= 'adiy.local' 
-
 sqlServerServiceAccountUserName='adiysql'
 sqlServerServiceAccountPassword='P@ssw0rd1234'
-
 sharePointSetupUserAccountUserName='adiysp'
 sharePointSetupUserAccountPassword= 'P@ssw0rd1234'
 sharePointFarmAccountUserName='sp_farm'
 sharePointFarmAccountPassword= 'P@ssw0rd1234'
 sharePointFarmPassphrasePassword='P@ssw0rd1234'
-
 spSiteTemplateName='STS#0'
 spDNSPrefix='sp-unique'
 baseUrl='https://raw.githubusercontent.com/aqasrawi/sp2016/master'
 #baseUrl = 'https://raw.githubusercontent.com/razar-msft/SharePoint-Non-HA-FARM/master'
 spPublicIPNewOrExisting='new'
 spPublicIPRGName=''
-#sppublicIPAddressName= $sppuplicIP
+sppublicIPAddressName= $sppuplicIP
 storageAccountNamePrefix= $storageAccountNamePrefix
 storageAccountType='Standard_LRS'
 
@@ -66,5 +63,5 @@ New-AzureRmResourceGroup `
 
 
 
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-network.json -TemplateParameterObject $parameters -Verbose
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-network.json -TemplateParameterObject $parameters
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-vms.json -TemplateParameterObject $parameters
