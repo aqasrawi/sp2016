@@ -65,6 +65,22 @@ storageAccountType='Standard_LRS'
 
 }
 
+#
+# Scripts
+#
+#Storage Account Context
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-storage.json -TemplateParameterObject $parameters -Verbose
+
+$storageAccount = Get-AzureRmStorageAccount -ResourceGroupName $resourceGroupName
+
+$CustomScriptPath ='C:\DSC\Scripts'
+Get-ChildItem -Path $Customscriptfolder -File -Recurse | Set-AzureStorageBlobContent -Context $StorageAccountContext  -Container $ContainerName -Force 
+#Set Read Permission
+Set-AzureStorageContainerAcl -Name $ContainerName -Context $StorageAccountContext -Permission Container
+ 
+
+
+
 New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-ahmed-global.json -TemplateParameterObject $parameters -Verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
