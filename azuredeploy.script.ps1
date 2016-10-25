@@ -6,11 +6,11 @@
   
 #)
 
-Login-AzureRmAccount
+#Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
 
 
-$srNumber = '2016v'
+$srNumber = Read-Host ("SR Number ") # '2016v'
 $resourceGroupName = 'RGsp' + $srNumber
 $location = 'east us'
 
@@ -19,7 +19,16 @@ $storageAccountNamePrefix  = 'storage' + $srNumber
 
 $sharepointFarmName = 'spfarm' + $srNumber
 $virtualNetworkName = 'spfarmVNET'+ $srNumber
-$sppuplicIP = 'sppuplicIP' + $srNumber
+$sppuplicIPName = 'sppuplicIP' + $srNumber
+
+New-AzureRmResourceGroup -Name $resourceGroupName -Location $Location -Verbose -Force
+
+$sppublicIP = New-AzureRmPublicIpAddress -AllocationMethod Dynamic -ResourceGroupName $resourceGroupName -Name $sppuplicIPName  -Location $location
+
+
+
+#$publicip = New-AzureRmPublicIpAddress -ResourceGroupName $fipResrouceGroupName -Name $frontEndpublicIpName -Location $azureRegion -AllocationMethod Dynamic
+
 $parameters=@{
 
 
@@ -45,23 +54,17 @@ sharePointFarmAccountUserName='sp_farm'
 sharePointFarmAccountPassword= 'P@ssw0rd1234'
 sharePointFarmPassphrasePassword='P@ssw0rd1234'
 spSiteTemplateName='STS#0'
-spDNSPrefix='sp-unique'
+spDNSPrefix='sp-unique' + $srNumber
 baseUrl='https://raw.githubusercontent.com/aqasrawi/sp2016/master'
 #baseUrl = 'https://raw.githubusercontent.com/razar-msft/SharePoint-Non-HA-FARM/master'
 spPublicIPNewOrExisting='new'
 spPublicIPRGName=''
-sppublicIPAddressName= $sppuplicIP
+sppublicIPAddressName= $sppublicIP.Name
 storageAccountNamePrefix= $storageAccountNamePrefix
 storageAccountType='Standard_LRS'
 
 }
 
-New-AzureRmResourceGroup `
-    -Name $resourceGroupName `
-    -Location $Location `
-    -Verbose -Force
 
-
-
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-network.json -TemplateParameterObject $parameters
-#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-vms.json -TemplateParameterObject $parameters
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
