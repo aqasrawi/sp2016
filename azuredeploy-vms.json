@@ -320,151 +320,201 @@
       "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
       "configuringSharepointUrl": "[concat(parameters('baseUrl'),'/configuringSharepoint.json')]"
     },
-    "resources": [
-      {
-        "name": "ProvisioningADDomainController",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
+  "resources": [
+    {
+      "name": "ProvisioningADDomainController",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
 
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('ProvisioningADDomainControllerUrl')]",
-            "contentVersion": "1.0.0.0"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('ProvisioningADDomainControllerUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
           },
-          "parameters": {
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "adVMName": {
-              "value": "[variables('adVMName')]"
-            },
-            "adVMSize": {
-              "value": "[parameters('adVMSize')]"
-            },
-            "adAvailabilitySetName": {
-              "value": "[variables('adAvailabilitySetName')]"
-            },
-            "adminUsername": {
-              "value": "[parameters('adminUsername')]"
-            },
-            "adminPassword": {
-              "value": "[parameters('adminPassword')]"
-            },
-            "storageAccountNamePrefix": {
-              "value": "[parameters('storageAccountNamePrefix')]"
-            },
-            "adDataDisk": {
-              "value": "[variables('adDataDisk')]"
-            },
-            "adNicName": {
-              "value": "[variables('adNicName')]"
-            },
-            "adModulesURL": {
-              "value": "[variables('adModulesURL')]"
-            },
-            "adConfigurationFunction": {
-              "value": "[variables('adConfigurationFunction')]"
-            },
-            "domainName": {
-              "value": "[parameters('domainName')]"
-            }
+          "adVMName": {
+            "value": "[variables('adVMName')]"
+          },
+          "adVMSize": {
+            "value": "[parameters('adVMSize')]"
+          },
+          "adAvailabilitySetName": {
+            "value": "[variables('adAvailabilitySetName')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "storageAccountNamePrefix": {
+            "value": "[parameters('storageAccountNamePrefix')]"
+          },
+          "adDataDisk": {
+            "value": "[variables('adDataDisk')]"
+          },
+          "adNicName": {
+            "value": "[variables('adNicName')]"
+          },
+          "adModulesURL": {
+            "value": "[variables('adModulesURL')]"
+          },
+          "adConfigurationFunction": {
+            "value": "[variables('adConfigurationFunction')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
           }
         }
-      },
-      {
-        "name": "ProvisioningSQLServerVM",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
+      }
+    },
+    {
+      "name": "ProvisioningSQLServerVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
 
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('ProvisioningSQLUrl')]",
-            "contentVersion": "1.0.0.0"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('ProvisioningSQLUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
           },
-          "parameters": {
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "sqlVMName": {
-              "value": "[variables('sqlVMName')]"
-            },
-            "sqlVMSize": {
-              "value": "[parameters('sqlVMSize')]"
-            },
-            "sqlAvailabilitySetName": {
-              "value": "[variables('sqlAvailabilitySetName')]"
-            },
-            "adminUsername": {
-              "value": "[parameters('adminUsername')]"
-            },
-            "adminPassword": {
-              "value": "[parameters('adminPassword')]"
-            },
-            "storageAccountNamePrefix": {
-              "value": "[parameters('storageAccountNamePrefix')]"
-            },
-            "sqlDataDisk": {
-              "value": "[variables('sqlDataDisk')]"
-            },
-            "sqlLogDisk": {
-              "value": "[variables('sqlLogDisk')]"
-            },
-            "sqlNicName": {
-              "value": "[variables('sqlNicName')]"
-            },
-            "sqlPrepareModulesURL": {
-              "value": "[variables('sqlPrepareModulesURL')]"
-            },
-            "sqlPreparationFunction": {
-              "value": "[variables('sqlPreparationFunction')]"
-            },
-            "DNSServerAddress": {
-              "value": "[parameters('adNicIPAddress')]"
-            }
+          "sqlVMName": {
+            "value": "[variables('sqlVMName')]"
+          },
+          "sqlVMSize": {
+            "value": "[parameters('sqlVMSize')]"
+          },
+          "sqlAvailabilitySetName": {
+            "value": "[variables('sqlAvailabilitySetName')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "storageAccountNamePrefix": {
+            "value": "[parameters('storageAccountNamePrefix')]"
+          },
+          "sqlDataDisk": {
+            "value": "[variables('sqlDataDisk')]"
+          },
+          "sqlLogDisk": {
+            "value": "[variables('sqlLogDisk')]"
+          },
+          "sqlNicName": {
+            "value": "[variables('sqlNicName')]"
+          },
+          "sqlPrepareModulesURL": {
+            "value": "[variables('sqlPrepareModulesURL')]"
+          },
+          "sqlPreparationFunction": {
+            "value": "[variables('sqlPreparationFunction')]"
+          },
+          "DNSServerAddress": {
+            "value": "[parameters('adNicIPAddress')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "UpdatingDNStoPrimaryADVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/ProvisioningADDomainController",
+        "Microsoft.Resources/deployments/ProvisioningSQLServerVM"
+
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('vnetwithDNSTemplateUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "virtualNetworkName": {
+            "value": "[parameters('virtualNetworkName')]"
+          },
+          "virtualNetworkAddressRange": {
+            "value": "[parameters('virtualNetworkAddressRange')]"
+          },
+          "subnets": {
+            "value": "[variables('subnets')]"
+          },
+          "DNSServerAddress": {
+            "value": [
+              "[parameters('adNicIPAddress')]"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "ConfiguringSQLServerVM",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('configuringSQLUrl')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "sqlVMName": {
+            "value": "[variables('sqlVMName')]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "adminPassword": {
+            "value": "[parameters('adminPassword')]"
+          },
+          "sqlConfgureModulesURL": {
+            "value": "[variables('sqlConfigureModulesURL')]"
+          },
+          "sqlConfigurationFunction": {
+            "value": "[variables('sqlConfigurationFunction')]"
+          },
+          "domainName": {
+            "value": "[parameters('domainName')]"
+          },
+          "sqlServerServiceAccountUserName": {
+            "value": "[parameters('sqlServerServiceAccountUserName')]"
+          },
+          "sharePointSetupUserAccountUserName": {
+            "value": "[parameters('sharePointSetupUserAccountUserName')]"
+          },
+          "sqlServerServiceAccountPassword": {
+            "value": "[parameters('sqlServerServiceAccountPassword')]"
+          },
+          "sharePointSetupUserAccountPassword": {
+            "value": "[parameters('sharePointSetupUserAccountPassword')]"
           }
         }
       },
-      {
-        "name": "UpdatingDNStoPrimaryADVM",
-        "type": "Microsoft.Resources/deployments",
-        "apiVersion": "2015-01-01",
-        "dependsOn": [
-          "Microsoft.Resources/deployments/ProvisioningADDomainController",
-          "Microsoft.Resources/deployments/ProvisioningSQLServerVM",
-          
-        ],
-        "properties": {
-          "mode": "Incremental",
-          "templateLink": {
-            "uri": "[variables('vnetwithDNSTemplateUrl')]",
-            "contentVersion": "1.0.0.0"
-          },
-          "parameters": {
-            "location": {
-              "value": "[parameters('location')]"
-            },
-            "virtualNetworkName": {
-              "value": "[parameters('virtualNetworkName')]"
-            },
-            "virtualNetworkAddressRange": {
-              "value": "[parameters('virtualNetworkAddressRange')]"
-            },
-            "subnets": {
-              "value": "[variables('subnets')]"
-            },
-            "DNSServerAddress": {
-              "value": [
-                "[parameters('adNicIPAddress')]"
-              ]
-            }
-          }
-        }
-      },
-      ]
+    }
+  ]
   }

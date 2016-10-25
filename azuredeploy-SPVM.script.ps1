@@ -10,7 +10,7 @@ Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
 
 
-$srNumber = '2016z'
+$srNumber = '2016w'
 $resourceGroupName = 'RGsp' + $srNumber
 $location = 'east us'
 
