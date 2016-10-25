@@ -19,7 +19,7 @@ $storageAccountNamePrefix  = 'storage' + $srNumber
 
 $sharepointFarmName = 'spfarm' + $srNumber
 $virtualNetworkName = 'spfarmVNET'+ $srNumber
-$sppuplicIP = 'sppuplicIP' + $srNumber
+#$sppuplicIP = 'sppuplicIP' + $srNumber
 $parameters=@{
 
 
@@ -53,7 +53,7 @@ baseUrl='https://raw.githubusercontent.com/aqasrawi/sp2016/master'
 #baseUrl = 'https://raw.githubusercontent.com/razar-msft/SharePoint-Non-HA-FARM/master'
 spPublicIPNewOrExisting='new'
 spPublicIPRGName=''
-sppublicIPAddressName= $sppuplicIP
+#sppublicIPAddressName= $sppuplicIP
 storageAccountNamePrefix= $storageAccountNamePrefix
 storageAccountType='Standard_LRS'
 
