@@ -414,9 +414,7 @@
       "name": "ConfiguringSharepointVM",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "dependsOn": [
-        "Microsoft.Resources/deployments/ConfiguringSQLServerVM"
-      ],
+      
       "properties": {
         "mode": "Incremental",
         "templateLink": {
