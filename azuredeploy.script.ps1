@@ -6,7 +6,7 @@
   
 #)
 
-Login-AzureRmAccount
+#Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
 
 

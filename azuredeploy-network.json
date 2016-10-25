@@ -430,9 +430,7 @@
             "publicIPAddressType": {
               "value": "[variables('publicIPAddressType')]"
             },
-            "dnsPrefix": {
-              "value": "[parameters('spDNSPrefix')]"
-            },
+
             "publicIpRGName": {
               "value": "[parameters('spPublicIPRGName')]"
             }
