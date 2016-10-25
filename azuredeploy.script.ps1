@@ -61,6 +61,7 @@ spPublicIPNewOrExisting='new'
 spPublicIPRGName=''
 sppublicIPAddressName= $sppublicIP.Name
 storageAccountNamePrefix= $storageAccountNamePrefix
+scriptStorageAccountNamePrefix= 's' + $storageAccountNamePrefix
 storageAccountType='Standard_LRS'
 
 }
@@ -69,9 +70,10 @@ storageAccountType='Standard_LRS'
 # Scripts
 #
 #Storage Account Context
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-storage.json -TemplateParameterObject $parameters -Verbose
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-storage.json -TemplateParameterObject $parameters -Verbose
 
 $storageAccount = Get-AzureRmStorageAccount -ResourceGroupName $resourceGroupName
+$storageAccountName = $storageAccount.StorageAccountName[0]
 
 $CustomScriptPath ='C:\DSC\Scripts'
 Get-ChildItem -Path $Customscriptfolder -File -Recurse | Set-AzureStorageBlobContent -Context $StorageAccountContext  -Container $ContainerName -Force 
@@ -81,7 +83,7 @@ Set-AzureStorageContainerAcl -Name $ContainerName -Context $StorageAccountContex
 
 
 
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-ahmed-global.json -TemplateParameterObject $parameters -Verbose
+#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-ahmed-global.json -TemplateParameterObject $parameters -Verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-spvm.json -TemplateParameterObject $parameters -Verbose
