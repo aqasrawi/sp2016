@@ -485,7 +485,7 @@
     {
       "apiVersion": "2016-03-30",
       "location": "[parameters('location')]",
-      "name": "MyCustomScriptExtension",
+      "name": "InstallWMFScript",
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "CustomScriptExtension",
