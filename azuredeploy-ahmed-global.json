@@ -782,6 +782,8 @@
         }
       }
     },
+
+
     {
       "name": "ConfiguringSQLServerVM",
       "type": "Microsoft.Resources/deployments",

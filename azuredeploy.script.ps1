@@ -1,14 +1,5 @@
-﻿#param(
-
- #[Parameter(Mandatory=$True)]
- #[string]
- #$srNumber
-  
-#)
-
-#Login-AzureRmAccount
+﻿#Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
-
 
 $srNumber = Read-Host ("SR Number ") # '2016v'
 $resourceGroupName = 'RGsp' + $srNumber
@@ -21,12 +12,10 @@ $sharepointFarmName = 'spfarm' + $srNumber
 $virtualNetworkName = 'spfarmVNET'+ $srNumber
 $sppuplicIPName = 'sppuplicIP' + $srNumber
 
+
 New-AzureRmResourceGroup -Name $resourceGroupName -Location $Location -Verbose -Force
 
 $sppublicIP = New-AzureRmPublicIpAddress -AllocationMethod Dynamic -ResourceGroupName $resourceGroupName -Name $sppuplicIPName  -Location $location
-
-
-
 #$publicip = New-AzureRmPublicIpAddress -ResourceGroupName $fipResrouceGroupName -Name $frontEndpublicIpName -Location $azureRegion -AllocationMethod Dynamic
 
 $parameters=@{
@@ -61,29 +50,14 @@ spPublicIPNewOrExisting='new'
 spPublicIPRGName=''
 sppublicIPAddressName= $sppublicIP.Name
 storageAccountNamePrefix= $storageAccountNamePrefix
-scriptStorageAccountNamePrefix= 's' + $storageAccountNamePrefix
+
 storageAccountType='Standard_LRS'
+   
+
 
 }
 
-#
-# Scripts
-#
-#Storage Account Context
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile C:\Users\aqasrawi\Documents\GitHub\sp2016\azuredeploy-storage.json -TemplateParameterObject $parameters -Verbose
-
-$storageAccount = Get-AzureRmStorageAccount -ResourceGroupName $resourceGroupName
-$storageAccountName = $storageAccount.StorageAccountName[0]
-
-$CustomScriptPath ='C:\DSC\Scripts'
-Get-ChildItem -Path $Customscriptfolder -File -Recurse | Set-AzureStorageBlobContent -Context $StorageAccountContext  -Container $ContainerName -Force 
-#Set Read Permission
-Set-AzureStorageContainerAcl -Name $ContainerName -Context $StorageAccountContext -Permission Container
- 
-
-
-
-#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-ahmed-global.json -TemplateParameterObject $parameters -Verbose
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-ahmed-global.json -TemplateParameterObject $parameters -Verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-spvm.json -TemplateParameterObject $parameters -Verbose
