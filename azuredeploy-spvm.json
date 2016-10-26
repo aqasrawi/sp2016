@@ -403,7 +403,9 @@
       "name": "ConfiguringSharepointVM",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-
+      "dependsOn": [
+        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+      ],
       "properties": {
         "mode": "Incremental",
         "templateLink": {
