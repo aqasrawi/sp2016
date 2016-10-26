@@ -2,6 +2,9 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "spVMName": {
+      "type": "string"
+    },
     "sharepointFarmName": {
       "type": "string",
       "metadata": {
@@ -22,199 +25,199 @@
         "description": "The department"
       }
     },
-      "virtualNetworkName": {
-        "type": "string",
-        "metadata": {
-          "description": "The name of the Virtual Network to Create"
-        },
-        "defaultValue": "spfarmVNET"
+    "virtualNetworkName": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Virtual Network to Create"
       },
-      "virtualNetworkAddressRange": {
-        "type": "string",
-        "metadata": {
-          "description": "The address range of the new VNET "
-        },
-        "defaultValue": "10.0.0.0/16"
+      "defaultValue": "spfarmVNET"
+    },
+    "virtualNetworkAddressRange": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the new VNET "
       },
-      "adSubnet": {
-        "type": "string",
-        "metadata": {
-          "description": "The address range of the AD subnet created in the new VNET"
-        },
-        "defaultValue": "10.0.0.0/24"
+      "defaultValue": "10.0.0.0/16"
+    },
+    "adSubnet": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the AD subnet created in the new VNET"
       },
-      "sqlSubnet": {
-        "type": "string",
-        "metadata": {
-          "description": "The address range of the SQL subnet created in the new VNET"
-        },
-        "defaultValue": "10.0.1.0/24"
+      "defaultValue": "10.0.0.0/24"
+    },
+    "sqlSubnet": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the SQL subnet created in the new VNET"
       },
-      "spSubnet": {
-        "type": "string",
-        "metadata": {
-          "description": "The address range of the SP subnet created in the new VNET"
-        },
-        "defaultValue": "10.0.2.0/24"
+      "defaultValue": "10.0.1.0/24"
+    },
+    "spSubnet": {
+      "type": "string",
+      "metadata": {
+        "description": "The address range of the SP subnet created in the new VNET"
       },
-      "adNicIPAddress": {
-        "type": "string",
-        "metadata": {
-          "description": "The IP address of the new AD VM"
-        },
-        "defaultValue": "10.0.0.4"
+      "defaultValue": "10.0.2.0/24"
+    },
+    "adNicIPAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The IP address of the new AD VM"
       },
-      "adminUsername": {
-        "type": "string",
-        "metadata": {
-          "description": "The name of the Administrator of the new VM and Domain"
-        }
-      },
-      "adminPassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "The password forthe Administrator account of the new VM and Domain"
-        }
-      },
-      "adVMSize": {
-        "type": "string",
-        "metadata": {
-          "description": "The size of the AD VM Created"
-        },
-        "defaultValue": "Standard_DS2"
-      },
-      "sqlVMSize": {
-        "type": "string",
-        "metadata": {
-          "description": "The size of the SQL VM Created"
-        },
-        "defaultValue": "Standard_DS2"
-      },
-      "spVMSize": {
-        "type": "string",
-        "metadata": {
-          "description": "The size of the VM Created"
-        },
-        "defaultValue": "Standard_DS3"
-      },
-      "domainName": {
-        "type": "string",
-        "metadata": {
-          "description": "The FQDN of the AD Domain created "
-        },
-        "defaultValue": "contoso.local"
-      },
-      "sqlServerServiceAccountUserName": {
-        "type": "string",
-        "metadata": {
-          "description": "The SQL Server Service account name"
-        },
-        "defaultValue": "sqlservice"
-      },
-      "sqlServerServiceAccountPassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "The SQL Server Service account password"
-        }
-      },
-      "sharePointSetupUserAccountUserName": {
-        "type": "string",
-        "metadata": {
-          "description": "The Sharepoint Setup account name"
-        },
-        "defaultValue": "sp_setup"
-      },
-      "sharePointSetupUserAccountPassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "The Sharepoint Setup account password"
-        }
-      },
-      "sharePointFarmAccountUserName": {
-        "type": "string",
-        "metadata": {
-          "description": "The Sharepoint Farm account name"
-        },
-        "defaultValue": "sp_farm"
-      },
-      "sharePointFarmAccountPassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "The Sharepoint Farm account password"
-        }
-      },
-      "sharePointFarmPassphrasePassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "The Sharepoint Farm Passphrase"
-        }
-      },
-      "spSiteTemplateName": {
-        "type": "string",
-        "metadata": {
-          "description": "The Sharepoint Content Site Template Name"
-        },
-        "defaultValue": "STS#0"
-      },
-      "spDNSPrefix": {
-        "type": "string",
-        "metadata": {
-          "description": "The DNS Prefix for the SharePoint Public IP Address"
-        }
-      },
-      "baseUrl": {
-        "type": "string",
-        "metadata": {
-          "artifactsBaseUrl": "",
-          "description": "URL to acquire other templates"
-        },
-        "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/sharepoint-three-vm"
-      },
-      "spPublicIPNewOrExisting": {
-        "type": "string",
-        "defaultValue": "new",
-        "allowedValues": [
-          "new",
-          "existing"
-        ],
-        "metadata": {
-          "description": "Indicates whether the Sharepoint farm's IP is new or existing"
-        }
-      },
-      "spPublicIPRGName": {
-        "type": "string",
-        "defaultValue": "",
-        "metadata": {
-          "description": "Resource Group containing existing public IP for Sharepoint"
-        }
-      },
-      "sppublicIPAddressName": {
-        "type": "string",
-        "metadata": {
-          "description": "Name of existing public IP resource for Sharepoint"
-        }
-      },
-
-      "storageAccountNamePrefix": {
-        "type": "string",
-        "metadata": {
-          "description": "Name prefix of the new storage account created to store the VMs disks"
-        }
-      },
-      "storageAccountType": {
-        "type": "string",
-        "allowedValues": [
-          "Premium_LRS",
-          "Standard_LRS",
-          "Standard_GRS"
-
-        ],
-        "metadata": {
-          "description": "The type of the Storage Account created"
-        },
-        "defaultValue": "Premium_LRS"
+      "defaultValue": "10.0.0.4"
+    },
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the Administrator of the new VM and Domain"
       }
     },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password forthe Administrator account of the new VM and Domain"
+      }
+    },
+    "adVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the AD VM Created"
+      },
+      "defaultValue": "Standard_DS2"
+    },
+    "sqlVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the SQL VM Created"
+      },
+      "defaultValue": "Standard_DS2"
+    },
+    "spVMSize": {
+      "type": "string",
+      "metadata": {
+        "description": "The size of the VM Created"
+      },
+      "defaultValue": "Standard_DS3"
+    },
+    "domainName": {
+      "type": "string",
+      "metadata": {
+        "description": "The FQDN of the AD Domain created "
+      },
+      "defaultValue": "contoso.local"
+    },
+    "sqlServerServiceAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The SQL Server Service account name"
+      },
+      "defaultValue": "sqlservice"
+    },
+    "sqlServerServiceAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The SQL Server Service account password"
+      }
+    },
+    "sharePointSetupUserAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Setup account name"
+      },
+      "defaultValue": "sp_setup"
+    },
+    "sharePointSetupUserAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Setup account password"
+      }
+    },
+    "sharePointFarmAccountUserName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Farm account name"
+      },
+      "defaultValue": "sp_farm"
+    },
+    "sharePointFarmAccountPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Farm account password"
+      }
+    },
+    "sharePointFarmPassphrasePassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The Sharepoint Farm Passphrase"
+      }
+    },
+    "spSiteTemplateName": {
+      "type": "string",
+      "metadata": {
+        "description": "The Sharepoint Content Site Template Name"
+      },
+      "defaultValue": "STS#0"
+    },
+    "spDNSPrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "The DNS Prefix for the SharePoint Public IP Address"
+      }
+    },
+    "baseUrl": {
+      "type": "string",
+      "metadata": {
+        "artifactsBaseUrl": "",
+        "description": "URL to acquire other templates"
+      },
+      "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/sharepoint-three-vm"
+    },
+    "spPublicIPNewOrExisting": {
+      "type": "string",
+      "defaultValue": "new",
+      "allowedValues": [
+        "new",
+        "existing"
+      ],
+      "metadata": {
+        "description": "Indicates whether the Sharepoint farm's IP is new or existing"
+      }
+    },
+    "spPublicIPRGName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Resource Group containing existing public IP for Sharepoint"
+      }
+    },
+    "sppublicIPAddressName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of existing public IP resource for Sharepoint"
+      }
+    },
+
+    "storageAccountNamePrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "Name prefix of the new storage account created to store the VMs disks"
+      }
+    },
+    "storageAccountType": {
+      "type": "string",
+      "allowedValues": [
+        "Premium_LRS",
+        "Standard_LRS",
+        "Standard_GRS"
+
+      ],
+      "metadata": {
+        "description": "The type of the Storage Account created"
+      },
+      "defaultValue": "Premium_LRS"
+    }
+  },
     "variables": {
       "assetLocation": "[concat(parameters('baseUrl'),'/dsc')]",
       "configDatabaseName": "SP_Config",
@@ -485,7 +488,8 @@
     {
       "apiVersion": "2016-03-30",
       "location": "[parameters('location')]",
-      "name": "InstallWMFScript",
+      "name": "[concat(parameters('spVMName'),'/InstallWMFScript')",
+      
       "properties": {
         "publisher": "Microsoft.Compute",
         "type": "CustomScriptExtension",
