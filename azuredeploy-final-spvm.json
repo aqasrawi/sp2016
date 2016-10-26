@@ -294,7 +294,7 @@
     "sqlConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSqlServer.ps1.zip')]",
     "sqlConfigurationFunction": "ConfigureSqlServer.ps1\\ConfigureSqlServer",
     "spConfigureModulesURL": "[concat(variables('assetLocation'),'/FinalConfigureSharePointServer.ps1.zip')]",
-    "spConfigurationFunction": "ConfigureSharePointServer.ps1\\ConfigureSharePointServer",
+    "spConfigurationFunction": "FinalConfigureSharePointServer.ps1\\ConfigureSharePointServer",
     "sqlPrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareSqlServer.ps1.zip')]",
     "sqlPreparationFunction": "PrepareSqlServer.ps1\\PrepareSqlServer",
     "spPrepareModulesURL": "[concat(variables('assetLocation'),'/PrepareSharePointServer.ps1.zip')]",
@@ -312,8 +312,8 @@
     "provisioningSharepointUrl": "[concat(parameters('baseUrl'),'/provisioningSharepoint.json')]",
     "configuringSQLUrl": "[concat(parameters('baseUrl'),'/configuringSQL.json')]",
     "configuringSharepointUrl": "[concat(parameters('baseUrl'),'/configuringSharepoint.json')]",
-    "finalConfiguringSharepointUrl": "[concat(parameters('baseUrl'),'/finalConfiguringSharepoint.json')]",
-    
+    "finalConfiguringSharepointUrl": "[concat(parameters('baseUrl'),'/finalConfiguringSharepoint.json')]"
+
   },
   "resources": [
     {
