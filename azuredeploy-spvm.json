@@ -484,25 +484,6 @@
           }
         }
       }
-    },
-    {
-      "apiVersion": "2016-03-30",
-      "location": "[parameters('location')]",
-      "name": "[concat(parameters('spVMName'),'/InstallWMFScript')",
-      
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.7",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": [
-            "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/Install-WMF5.ps1"
-          ],
-          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File Install-WMF5.ps1"
-        }
-      },
-      "type": "Microsoft.Compute/virtualMachines/extensions"
     }
 
 
