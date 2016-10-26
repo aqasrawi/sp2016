@@ -216,6 +216,7 @@
     "adVMName": "[concat(parameters('sharepointFarmName'),'-ad')]",
     "sqlVMName": "[concat(parameters('sharepointFarmName'),'-sql')]",
     "spVMName": "[concat(parameters('sharepointFarmName'),'-sp')]",
+    "spExtensionName": "[concat(parameters('sharepointFarmName'),'-ex')]",
     "LBFE": "LBFE",
     "LBBE": "LBBE",
     "RDPNAT": "RDP",
@@ -399,12 +400,12 @@
         }
       }
     },
-    {      
-      "name": "[concat(variables('spVMName'),'/SPCustomScriptExtension')]",
+    {
+      "name": "[variables('spExtensionName')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "location": "[parameters('location')]",
       "apiVersion": "2016-03-30",
-      "dependsOn": [       
+      "dependsOn": [
         "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
       ],
       "properties": {
