@@ -63,7 +63,7 @@
             "publisher": "MicrosoftSharePoint",
             "offer": "MicrosoftSharePointServer",
             "sku": "2016",
-            "version": "latest"
+            "version": "16.0.4354"
           },
           "osDisk": {
             "name": "osdisk",
