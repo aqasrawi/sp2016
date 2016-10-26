@@ -1,7 +1,8 @@
 ﻿#Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
 
-$srNumber = Read-Host ("SR Number ") # '2016v'
+#$srNumber = Read-Host ("SR Number ") # 'm2016'
+$srNumber = 'm2016'
 $resourceGroupName = 'RGsp' + $srNumber
 $location = 'east us'
 
