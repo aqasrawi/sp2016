@@ -404,8 +404,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "location": "[parameters('location')]",
       "apiVersion": "2016-03-30",
-      "dependsOn": [
-       
+      "dependsOn": [       
         "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
       ],
       "properties": {
@@ -425,10 +424,11 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "dependsOn": [
-        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM",
+        "Microsoft.Compute/virtualMachines/extensions"
       ],
       "properties": {
-        "mode": "Incremental",
+        "mode" : "Incremental",
         "templateLink": {
           "uri": "[variables('configuringSharepointUrl')]",
           "contentVersion": "1.0.0.0"
