@@ -14,7 +14,7 @@
       "metadata": {
         "description": "The region to deploy the resources into"
       },
-      "defaultValue":"[resourceGroup().location]"
+      "defaultValue": "[resourceGroup().location]"
     },
     "virtualNetworkName": {
       "type": "string",
@@ -209,7 +209,7 @@
     }
   },
   "variables": {
-    "assetLocation":"[concat(parameters('baseUrl'),'/dsc')]",
+    "assetLocation": "[concat(parameters('baseUrl'),'/dsc')]",
     "configDatabaseName": "SP_Config",
     "administrationContentDatabaseName": "SP_AdminContent",
     "contentDatabaseName": "spARM_Content",
@@ -283,12 +283,12 @@
         }
       }
     ],
-    "SpPublicIpexisting":"[resourceId(parameters('spPublicIPRGName'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('sppublicIPAddressName'))]",
+    "SpPublicIpexisting": "[resourceId(parameters('spPublicIPRGName'),concat('Microsoft.Network','/','publicIPAddresses'),parameters('sppublicIPAddressName'))]",
     "SpPublicIpnew": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),parameters('sppublicIPAddressName'))]",
     "adPublicIpResourceId": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),variables('adpublicIPAddressName'))]",
     "sqlPublicIpResourceId": "[resourceId(concat('Microsoft.Network','/','publicIPAddresses'),variables('sqlpublicIPAddressName'))]",
-    "spFQDN":"[concat(parameters('spDNSPrefix'),'.',toLower(trim(replace(parameters('location'),' ' ,''))),'.cloudapp.azure.com')]",
-    "splbResourceId":"[resourceId(concat('Microsoft.Network','/','loadBalancers'),variables('spLBName'))]",
+    "spFQDN": "[concat(parameters('spDNSPrefix'),'.',toLower(trim(replace(parameters('location'),' ' ,''))),'.cloudapp.azure.com')]",
+    "splbResourceId": "[resourceId(concat('Microsoft.Network','/','loadBalancers'),variables('spLBName'))]",
     "adModulesURL": "[concat(variables('assetLocation'),'/CreateADPDC.ps1.zip')]",
     "adConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
     "sqlConfigureModulesURL": "[concat(variables('assetLocation'),'/ConfigureSqlServer.ps1.zip')]",
@@ -399,6 +399,27 @@
         }
       }
     },
+    {      
+      "name": "[concat(variables('spVMName'),'/SPCustomScriptExtension')]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [
+       
+        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+      ],
+      "properties": {
+
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.7",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [ "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/Install-WMF5.ps1" ],
+          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File Install-WMF5.ps1"
+        }
+      }
+    },
     {
       "name": "ConfiguringSharepointVM",
       "type": "Microsoft.Resources/deployments",
@@ -474,10 +495,10 @@
       }
     }
   ],
-  "outputs": {
-    "fqdn": {
-      "value": "[variables('spFQDN')]",
-      "type": "string"
+  "outputs": {    
+      "fqdn": {
+        "value": "[variables('spFQDN')]",
+        "type": "string"
+      }
     }
   }
-}
