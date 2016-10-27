@@ -2,7 +2,7 @@
 Set-AzureRmContext -SubscriptionID 3a4af7b3-b7ac-463d-9940-1d80445961a8
 
 #$srNumber = Read-Host ("SR Number ") # 'm2016'
-$srNumber = 'j2016'
+$srNumber = 'm2016'
 $resourceGroupName = 'RGsp' + $srNumber
 $location = 'east us'
 
@@ -71,9 +71,9 @@ storageAccountType='Standard_LRS'
 #
 # Provision the SP2016 VM including domain join and all pre-requisities needed for farm config
 #
-#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-spvm.json -TemplateParameterObject $parameters -Verbose
+New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-spvm.json -TemplateParameterObject $parameters -Verbose
 
 #
 # Configure an SP farm and central admin site
 #
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-final-spvm.json -TemplateParameterObject $parameters -Verbose
+#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-final-spvm.json -TemplateParameterObject $parameters -Verbose
