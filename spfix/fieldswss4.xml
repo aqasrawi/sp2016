@@ -64,7 +64,7 @@
         RowOrdinal="0"
         ReadOnly="TRUE"
         Type="Lookup"
-        List="Docs"        
+        List="Docs"
         ShowField="SMTotalSize"
         JoinColName="Id"
         DisplayName="$Resources:core,StorageMetrics_TotalSize;">
@@ -78,7 +78,7 @@
         RowOrdinal="0"
         ReadOnly="TRUE"
         Type="Lookup"
-        List="Docs"        
+        List="Docs"
         ShowField="SMLastModifiedDate"
         JoinColName="Id"
         DisplayName="$Resources:core,StorageMetrics_LastModifiedDate;">
@@ -92,7 +92,7 @@
         RowOrdinal="0"
         ReadOnly="TRUE"
         Type="Lookup"
-        List="Docs"        
+        List="Docs"
         ShowField="SMTotalFileStreamSize"
         JoinColName="Id"
         DisplayName="$Resources:core,StorageMetrics_TotalFileStreamSize;">
@@ -106,7 +106,7 @@
         RowOrdinal="0"
         ReadOnly="TRUE"
         Type="Lookup"
-        List="Docs"        
+        List="Docs"
         ShowField="SMTotalFileCount"
         JoinColName="Id"
         DisplayName="$Resources:core,StorageMetrics_TotalFileCount;">
