@@ -59,11 +59,21 @@ storageAccountType='Standard_LRS'
 }
 
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-ahmed-global.json -TemplateParameterObject $parameters -Verbose
-
+#
+# Deploy and configure all networking components
+#
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
-
+#
+# Provision the AD and SQL VMs, configure ADDS and SQL Server
+#
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
 
+#
+# Provision the SP2016 VM including domain join and all pre-requisities needed for farm config
+#
 New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-spvm.json -TemplateParameterObject $parameters -Verbose
 
+#
+# Configure an SP farm and central admin site
+#
 #New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-final-spvm.json -TemplateParameterObject $parameters -Verbose
