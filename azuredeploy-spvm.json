@@ -422,7 +422,9 @@
         "typeHandlerVersion": "1.7",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "fileUris": [ "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/WMF5.ps1" ],
+          "fileUris": [ "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/WMF5.ps1" ]         
+        },
+        "protectedSettings": {
           "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File WMF5.ps1"
         }
       }
