@@ -423,7 +423,7 @@
         "autoUpgradeMinorVersion": true,
         "settings": {
           "fileUris": [ "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/WMF5.ps1" ],
-          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File Install-WMF5.ps1"
+          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File WMF5.ps1"
         }
       }
     },
