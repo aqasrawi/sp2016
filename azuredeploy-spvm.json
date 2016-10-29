@@ -14,8 +14,16 @@
       "metadata": {
         "description": "The region to deploy the resources into"
       },
-      "defaultValue":"[resourceGroup().location]"
+      "defaultValue": "[resourceGroup().location]"
     },
+    "dept": {
+      "type": "string",
+      "metadata": {
+        "description": "The department"
+      },
+      "defaultValue": "Finance"
+    },
+
     "virtualNetworkName": {
       "type": "string",
       "metadata": {
@@ -397,6 +405,25 @@
               "[parameters('adNicIPAddress')]"
             ]
           }
+        }
+      }
+    },
+    {
+      "name": "[variables('spExtensionName')]",
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "location": "[parameters('location')]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [
+        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Compute",
+        "type": "CustomScriptExtension",
+        "typeHandlerVersion": "1.7",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [ "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/WMF5.ps1" ],
+          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File Install-WMF5.ps1"
         }
       }
     },
