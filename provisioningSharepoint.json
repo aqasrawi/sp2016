@@ -83,6 +83,15 @@
               "caching": "None",
               "diskSizeGB": 1000,
               "lun": 0
+            },
+            {
+              "lun": 1,
+              "name": "Utils",
+              "createOption": "Attach",
+              "vhd": {
+                "uri": "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/Utils.vhd"
+              },
+              "caching": "None"
             }
           ]
         },
