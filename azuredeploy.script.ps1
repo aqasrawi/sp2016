@@ -63,11 +63,11 @@ storageAccountType='Standard_LRS'
 #
 # Deploy and configure all networking components
 #
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
+#New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-network.json -TemplateParameterObject $parameters -verbose
 #
 # Provision the AD and SQL VMs, configure ADDS and SQL Server
 #
-New-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
+#clsNew-AzureRmResourceGroupDeployment -Name $deploymentName -ResourceGroupName $resourceGroupName -TemplateFile $PSScriptRoot\azuredeploy-vms.json -TemplateParameterObject $parameters -Verbose
 
 #
 # Provision the SP2016 VM including domain join and all pre-requisities needed for farm config
