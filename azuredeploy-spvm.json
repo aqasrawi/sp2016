@@ -407,28 +407,7 @@
           }
         }
       }
-    },
-    {
-      "name": "[variables('spExtensionName')]",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "location": "[parameters('location')]",
-      "apiVersion": "2016-03-30",
-      "dependsOn": [
-        "Microsoft.Resources/deployments/UpdatingDNStoPrimaryADVM"
-      ],
-      "properties": {
-        "publisher": "Microsoft.Compute",
-        "type": "CustomScriptExtension",
-        "typeHandlerVersion": "1.7",
-        "autoUpgradeMinorVersion": true,
-        "settings": {
-          "fileUris": [ "https://aqresourcestorage.blob.core.windows.net/aqrescontainer/WMF5.ps1" ]         
-        },
-        "protectedSettings": {
-          "commandToExecute": "powershell.exe -ExecutionPolicy Unrestricted -File WMF5.ps1"
-        }
-      }
-    },
+    },    
     {
       "name": "ConfiguringSharepointVM",
       "type": "Microsoft.Resources/deployments",
